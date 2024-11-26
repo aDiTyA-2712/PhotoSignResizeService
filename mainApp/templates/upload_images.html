@@ -84,35 +84,52 @@
         <form method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
             {% csrf_token %}
             
-            <!-- Profile Picture -->
             <div class="form-group">
-                {{ form.profile_pic.label_tag }}
-                {{ form.profile_pic }}
+                
+            
+                <!-- Image Section -->
+                <label for="dimension_unit_image">Choose Dimension Unit for Image:</label>
+                <select id="dimension_unit_image" name="dimension_unit_image" onchange="updateImagePlaceholder()">
+                    <option value="mm">mm</option>
+                    <option value="inches">inches</option>
+                </select>
+            
                 <label for="profile_width">Profile Width:</label>
-                <input type="number" name="profile_width" min="0" step="0.1" placeholder="Enter width in mm" required>
-
+                <input type="number" id="profile_width" name="profile_width" min="0" step="0.1" placeholder="Enter width in mm" required>
+            
                 <label for="profile_height">Profile Height:</label>
-                <input type="number" name="profile_height" min="0" step="0.1" placeholder="Enter height in mm" required>
-
-                <!--<button type="button" onclick="document.querySelector('input[name=\'profile_pic\']').click()">Upload Photo</button>-->
+                <input type="number" id="profile_height" name="profile_height" min="0" step="0.1" placeholder="Enter height in mm" required>
+            
+                <label for="profile_pic">Upload Profile Photo:</label>
+                <input type="file" id="profile_pic" name="profile_pic" required>
+            
+                <br><br>
+            
+                <!-- Signature Section -->
+                <label for="dimension_unit_signature">Choose Dimension Unit for Signature:</label>
+                <select id="dimension_unit_signature" name="dimension_unit_signature" onchange="static.js.updateSignaturePlaceholder()">
+                    <option value="mm">mm</option>
+                    <option value="inches">inches</option>
+                </select>
+            
+                <label for="signature_width">Signature Width:</label>
+                <input type="number" id="signature_width" name="signature_width" min="0" step="0.1" placeholder="Enter width in mm" required>
+            
+                <label for="signature_height">Signature Height:</label>
+                <input type="number" id="signature_height" name="signature_height" min="0" step="0.1" placeholder="Enter height in mm" required>
+            
+                <label for="signature_pic">Upload Signature:</label>
+                <input type="file" id="signature_pic" name="signature_pic" required>
+            
+                <!-- Error Message -->
+                {% if error_message %}
+                <div style="color: red;">{{ error_message }}</div>
+                {% endif %}
+            
             </div>
-
             
 
-            <!-- Signature Picture -->
-            <div class="form-group">
-                {{ form.sign_pic.label_tag }}
-                {{ form.sign_pic }}
-                <label for="sign_width">Signature Width:</label>
-                <input type="number" name="sign_width" min="0" step="0.1" placeholder="Enter width in mm" required>
-
-                <label for="sign_height">Signature Height:</label>
-                <input type="number" name="sign_height" min="0" step="0.1" placeholder="Enter height in mm" required>
-
-                <!--<button type="button" onclick="document.querySelector('input[name=\'sign_pic\']').click()">Upload Signature</button>-->
-            </div>
-
-        
+            
             <!-- Submit Button -->
             <div class="form-group">
                 <button type="submit">Submit</button>
